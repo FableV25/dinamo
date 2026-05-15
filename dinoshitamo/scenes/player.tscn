@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://iwpy5x1j008a"]
+
+[ext_resource type="Script" uid="uid://d2jrlq1tw8ea8" path="res://scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://bg5p03e2o6px" path="res://icons/stick.png" id="3_hqtel"]
+[ext_resource type="Texture2D" uid="uid://bl5s2d6b0dyt8" path="res://icons/donoass.png" id="3_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://ct0vqs1kboo32" path="res://icons/item box.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://djy84agv4abys" path="res://icons/item box frame.png" id="5_2hs0m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+radial_segments = 7
+rings = 3
+
+[node name="Player" type="CharacterBody3D" unique_id=1736952604]
+physics_interpolation_mode = 1
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+collision_layer = 2
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1679624593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1270251318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="CameraMarker" type="Marker3D" parent="." unique_id=1863810774]
+transform = Transform3D(0.9178516, -0.28066728, 0.28066742, -6.3220284e-08, 0.7071068, 0.7071067, -0.39692357, -0.6490191, 0.6490192, 4.03, 18, 11.9)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1550109487]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1283658621]
+transform = Transform3D(0.9178517, -0.28066736, 0.28066736, -2.1073435e-08, 0.7071067, 0.7071068, -0.39692363, -0.6490192, 0.649019, 4.034708, 13.645573, 11.937501)
+top_level = true
+projection = 1
+current = true
+size = 3.0
+near = 0.015
+far = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D" unique_id=807501509]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Camera3D/CanvasLayer" unique_id=1772069196]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -512.0
+offset_right = 512.0
+grow_vertical = 0
+texture = ExtResource("3_hqtel")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Camera3D" unique_id=1774940686]
+visible = false
+
+[node name="TextureRect2" type="TextureRect" parent="Camera3D/CanvasLayer2" unique_id=293471973]
+offset_left = 24.0
+offset_top = 23.0
+offset_right = 314.0
+offset_bottom = 313.0
+texture = ExtResource("3_sweqy")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Camera3D/CanvasLayer2" unique_id=2033474440]
+offset_left = 77.0
+offset_top = 73.0
+offset_right = 266.0
+offset_bottom = 262.0
+texture = ExtResource("3_i3pqv")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Camera3D/CanvasLayer2" unique_id=732963923]
+offset_left = 313.0
+offset_top = 61.0
+offset_right = 961.0
+offset_bottom = 101.0
+texture = ExtResource("5_2hs0m")
+expand_mode = 3

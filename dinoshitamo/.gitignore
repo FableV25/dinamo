@@ -1,0 +1,6 @@
+
+models/*
+!models/.gitkeep
+
+.godot/*
+!.godot/.gitkeep
