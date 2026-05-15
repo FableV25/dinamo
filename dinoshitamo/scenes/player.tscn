@@ -34,7 +34,8 @@ transform = Transform3D(0.9178516, -0.28066728, 0.28066742, -6.3220284e-08, 0.70
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 debug_enabled = true
-debug_path_custom_color = Color(1, 0, 1, 1)
+debug_use_custom = true
+debug_path_custom_color = Color(0.96639615, 0.9366885, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1283658621]
 transform = Transform3D(0.9178517, -0.28066736, 0.28066736, -2.1073435e-08, 0.7071067, 0.7071068, -0.39692363, -0.6490192, 0.649019, 4.034708, 13.645573, 11.937501)
