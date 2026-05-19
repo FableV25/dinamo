@@ -10,7 +10,10 @@ material = SubResource("StandardMaterial3D_v7lw1")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxcha"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_nh2m4"]
+
 [node name="npc" type="CharacterBody3D" unique_id=223183247 groups=["enemies"]]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 script = ExtResource("1_ideak")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1881992280]
@@ -28,5 +31,15 @@ debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.99722666, 0, 0.021551987, 1)
 
+[node name="DetectionZone" type="Area3D" parent="." unique_id=1694219376]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone" unique_id=9908520]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_nh2m4")
+debug_color = Color(0.9999997, 0.008957181, 0.06736565, 0.41960785)
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="body_shape_entered" from="DetectionZone" to="." method="_on_detection_zone_body_shape_entered"]
+[connection signal="body_shape_exited" from="DetectionZone" to="." method="_on_detection_zone_body_shape_exited"]

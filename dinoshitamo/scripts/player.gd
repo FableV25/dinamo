@@ -3,11 +3,10 @@ extends CharacterBody3D
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var camera_marker: Marker3D = $CameraMarker
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var p1 = preload("res://models/Blacksmith.fbx")
+@onready var p1 = preload("res://scenes/ai_main.tscn")
 @onready var p2 = preload("res://models/Child.fbx")
 
 const SPEED = 1.0
-const JUMP_VELOCITY = 3.5
 
 const ZOOM_SPEED = 15
 const ZOOM_MIN = 2.0
@@ -15,14 +14,20 @@ const ZOOM_MAX = 25.0
 var zoom_target := 10.0
 
 var player_mesh: Node3D  # reference to the visual model
+var anim_player_idle: AnimationPlayer
+var anim_player_walk: AnimationPlayer
 
 func _ready() -> void:
+	add_to_group("player")
 	camera_3d.global_position = camera_marker.global_position
 	if CharacterSelcetorThing.active_Charcter == "p1":
 		player_mesh = p1.instantiate()
 	else:
 		player_mesh = p2.instantiate()
 	add_child(player_mesh)
+	player_mesh.rotation_degrees.y = 180
+	anim_player_idle = player_mesh.get_node("AnimationPlayer")
+	anim_player_walk = player_mesh.get_node("walk")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -41,22 +46,18 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
 	# Navigation movement
 	if not navigation_agent_3d.is_navigation_finished():
 		var next_path_point := navigation_agent_3d.get_next_path_position()
 		var new_velocity := (next_path_point - global_position).normalized() * SPEED
 		velocity.x = new_velocity.x
 		velocity.z = new_velocity.z
-
-		# Rotate only the mesh, not the whole body
 		look_at_path(next_path_point)
+		anim_player_walk.play("Armature|walking_man|baselayer")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		anim_player_idle.play("Armature|clip0|baselayer")
 
 	move_and_slide()
 
@@ -85,6 +86,7 @@ func set_nav_target() -> void:
 func look_at_path(target: Vector3) -> void:
 	if not player_mesh:
 		return
-	# Only rotate on the Y axis so it doesn't tilt up/down
 	var direction = Vector3(target.x, player_mesh.global_position.y, target.z)
 	player_mesh.look_at(direction, Vector3.UP)
+	player_mesh.rotation_degrees.y += 180
+	

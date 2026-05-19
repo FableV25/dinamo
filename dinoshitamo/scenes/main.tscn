@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cabfeexjtm43n" path="res://textures/templategrid_albedo-2113202538.png" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://iwpy5x1j008a" path="res://scenes/player.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://pqmvix8er1b8" path="res://models/catedral_3D.blend" id="3_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://0m540eukqno4" path="res://models/semaforo.blend" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bqkcppig3eg7c" path="res://models/calle_godot.glb" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://db8vgh7ugtwtu" path="res://scenes/semaforo.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c3lymi25udwv2" path="res://scenes/npc.tscn" id="7_tipki"]
+[ext_resource type="PackedScene" uid="uid://dss0xflwcck6e" path="res://scenes/ai_main.tscn" id="8_tipki"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sugp2"]
 
@@ -29,6 +30,8 @@ albedo_texture = ExtResource("1_sugp2")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tefeu"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6xl0"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,6 +44,8 @@ background_mode = 2
 sky = SubResource("Sky_h2yge")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o6xl0"]
 
 [node name="Main" type="Node3D" unique_id=134283654]
 script = ExtResource("1_o6xl0")
@@ -73,17 +78,26 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tbgi4")
 transform = Transform3D(5.371817, 0, 0, 0, 1, 0, 0, 0, 4.563266, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_tefeu")
 
-[node name="semaforo" parent="." unique_id=1197973630 instance=ExtResource("4_tbgi4")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.485, -3.4021113, 0, 0.47794056)
-
 [node name="streat" type="StaticBody3D" parent="." unique_id=1742452535]
 transform = Transform3D(0.057898697, 0, 0, 0, 0.15857433, 0, 0, 0, 0.057898697, -1.1144218, 0, 2.674507)
 
 [node name="calle_godot" parent="streat" unique_id=341972063 instance=ExtResource("5_tefeu")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 
-[node name="calle_godot2" parent="streat" unique_id=2025230588 instance=ExtResource("5_tefeu")]
-transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 0, 16.066414)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="streat" unique_id=227144275]
+transform = Transform3D(6.828823, 0, 0, 0, 3.1205642, 0, 0, 0, 15.913661, 0, 0, 0)
+shape = SubResource("BoxShape3D_o6xl0")
+debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="streat" unique_id=1007934608]
+transform = Transform3D(3.1780915, 0, 0, 0, 0.5641522, 0, 0, 0, 15.913663, 5.203294, -0.24744217, 0)
+shape = SubResource("BoxShape3D_o6xl0")
+debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="streat" unique_id=654400343]
+transform = Transform3D(3.1780915, 0, 0, 0, 0.5641522, 0, 0, 0, 15.913663, -5.267374, -0.24744217, 0)
+shape = SubResource("BoxShape3D_o6xl0")
+debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
 
 [node name="Enviroment" type="Node" parent="." unique_id=616126639]
 
@@ -94,13 +108,13 @@ environment = SubResource("Environment_1bvp3")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1569133337]
+physics_material_override = SubResource("PhysicsMaterial_o6xl0")
+
+[node name="semaforo" parent="StaticBody3D" unique_id=1197973630 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -2.967312, 0, 0)
+
 [node name="npc" parent="." unique_id=223183247 instance=ExtResource("7_tipki")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.16572422, 0, 1.3470852)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.05234444, 1.2994858)
 
-[node name="npc2" parent="." unique_id=611634284 instance=ExtResource("7_tipki")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -1.507324, 0, 1.3470852)
-visible = false
-
-[node name="npc3" parent="." unique_id=123253546 instance=ExtResource("7_tipki")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -1.0650209, 0, 1.3470852)
-visible = false
+[node name="ai_main" parent="." unique_id=1509720008 instance=ExtResource("8_tipki")]
