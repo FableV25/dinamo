@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bleau5i5bduvr"]
+
+[ext_resource type="Script" uid="uid://b3rhavi3samq5" path="res://scripts/dialogue.gd" id="1_jwyou"]
+
+[node name="Dialogue" type="Node2D" unique_id=1217250003]
+process_mode = 3
+script = ExtResource("1_jwyou")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1621814019]
+process_mode = 3
+clip_contents = true
+offset_left = 200.0
+offset_top = 150.0
+offset_right = 1700.0
+offset_bottom = 900.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=229428429]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=559371978]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "sample"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1078903088]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=445056087]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(0.31764707, 1, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(1, 0.96862745, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = " yeah "
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2110054458]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.101960786, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.96862745, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "nah"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

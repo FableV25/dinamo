@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dvr2wc47vq3lq"]
+
+[ext_resource type="Script" uid="uid://beynpjlrdnhq6" path="res://scripts/travel.gd" id="1_a4hpc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wtxu0"]
+
+[node name="Travel" type="Node3D" unique_id=679239344]
+script = ExtResource("1_a4hpc")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=946574968]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1712138722]
+shape = SubResource("BoxShape3D_wtxu0")
+debug_color = Color(0.99999994, 0.29247808, 0.9576183, 1)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

@@ -1,13 +1,11 @@
-[gd_scene format=3 uid="uid://bxbod4uuloa80"]
+[gd_scene format=3 uid="uid://bkl1vwsh5y3ft"]
 
-[ext_resource type="Script" uid="uid://bw18c23ajhhn8" path="res://scripts/main.gd" id="1_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://cabfeexjtm43n" path="res://textures/templategrid_albedo-2113202538.png" id="1_sugp2"]
-[ext_resource type="PackedScene" uid="uid://iwpy5x1j008a" path="res://scenes/player.tscn" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://pqmvix8er1b8" path="res://models/catedral_3D.blend" id="3_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://bqkcppig3eg7c" path="res://models/calle_godot.glb" id="5_tefeu"]
-[ext_resource type="PackedScene" uid="uid://db8vgh7ugtwtu" path="res://scenes/semaforo.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://c3lymi25udwv2" path="res://scenes/npc.tscn" id="7_tipki"]
-[ext_resource type="PackedScene" uid="uid://dvr2wc47vq3lq" path="res://scenes/travel.tscn" id="8_tipki"]
+[ext_resource type="Script" uid="uid://bw18c23ajhhn8" path="res://scripts/main.gd" id="1_8xxfn"]
+[ext_resource type="PackedScene" uid="uid://iwpy5x1j008a" path="res://scenes/player.tscn" id="2_05h6v"]
+[ext_resource type="PackedScene" uid="uid://pqmvix8er1b8" path="res://models/catedral_3D.blend" id="3_u8rkk"]
+[ext_resource type="Texture2D" uid="uid://cabfeexjtm43n" path="res://textures/templategrid_albedo-2113202538.png" id="4_5m4sm"]
+[ext_resource type="PackedScene" uid="uid://db8vgh7ugtwtu" path="res://scenes/semaforo.tscn" id="6_c81b6"]
+[ext_resource type="PackedScene" uid="uid://c3lymi25udwv2" path="res://scenes/npc.tscn" id="7_gt1vp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sugp2"]
 
@@ -25,12 +23,10 @@ region_min_size = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
 albedo_color = Color(0.17480034, 0.6553794, 0, 1)
-albedo_texture = ExtResource("1_sugp2")
+albedo_texture = ExtResource("4_5m4sm")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tefeu"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o6xl0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -48,15 +44,15 @@ glow_enabled = true
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o6xl0"]
 
 [node name="Main" type="Node3D" unique_id=134283654]
-script = ExtResource("1_o6xl0")
+script = ExtResource("1_8xxfn")
 
-[node name="Player" parent="." unique_id=1736952604 instance=ExtResource("2_jyhfs")]
+[node name="Player" parent="." unique_id=1736952604 instance=ExtResource("2_05h6v")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.8075271, 0.055945843, 1.3263606)
 
 [node name="catedral" type="StaticBody3D" parent="." unique_id=2111797765]
 physics_material_override = SubResource("PhysicsMaterial_sugp2")
 
-[node name="catedral_3D2" parent="catedral" unique_id=527924131 instance=ExtResource("3_tbgi4")]
+[node name="catedral_3D2" parent="catedral" unique_id=527924131 instance=ExtResource("3_u8rkk")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.06602682, 1.8694563, -2.1444056)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="catedral" unique_id=1784116387]
@@ -78,27 +74,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tbgi4")
 transform = Transform3D(5.371817, 0, 0, 0, 1, 0, 0, 0, 4.563266, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_tefeu")
 
-[node name="street" type="StaticBody3D" parent="." unique_id=1742452535]
-transform = Transform3D(0.057898697, 0, 0, 0, 0.15857433, 0, 0, 0, 0.057898697, -1.1144218, 0, 2.674507)
-
-[node name="calle_godot" parent="street" unique_id=341972063 instance=ExtResource("5_tefeu")]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="street" unique_id=227144275]
-transform = Transform3D(6.828823, 0, 0, 0, 3.1205642, 0, 0, 0, 15.913661, 0, 0, 0)
-shape = SubResource("BoxShape3D_o6xl0")
-debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="street" unique_id=1007934608]
-transform = Transform3D(3.1780915, 0, 0, 0, 0.5641522, 0, 0, 0, 15.913663, 5.203294, -0.24744217, 0)
-shape = SubResource("BoxShape3D_o6xl0")
-debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="street" unique_id=654400343]
-transform = Transform3D(3.1780915, 0, 0, 0, 0.5641522, 0, 0, 0, 15.913663, -5.267374, -0.24744217, 0)
-shape = SubResource("BoxShape3D_o6xl0")
-debug_color = Color(0.9529412, 0.9490196, 0, 0.84313726)
-
 [node name="Enviroment" type="Node" parent="." unique_id=616126639]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment" unique_id=318070170]
@@ -111,11 +86,8 @@ shadow_enabled = true
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1569133337]
 physics_material_override = SubResource("PhysicsMaterial_o6xl0")
 
-[node name="semaforo" parent="StaticBody3D" unique_id=1197973630 instance=ExtResource("7_o6xl0")]
+[node name="semaforo" parent="StaticBody3D" unique_id=1197973630 instance=ExtResource("6_c81b6")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -2.967312, 0, 0)
 
-[node name="npc" parent="." unique_id=223183247 instance=ExtResource("7_tipki")]
+[node name="npc" parent="." unique_id=223183247 instance=ExtResource("7_gt1vp")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.05234444, 1.2994858)
-
-[node name="Travel" parent="." unique_id=679239344 instance=ExtResource("8_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3927436, 0.016986728, -0.45167208)
